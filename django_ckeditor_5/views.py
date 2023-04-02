@@ -36,8 +36,13 @@ def image_verify(f):
 
 def handle_uploaded_file(f):
     fs = storage()
-    filename = fs.save(f.name, f)
+    filename = fs.save(change_filename(f), f)  # I customize this command to replace spaces with - in filenames...
     return fs.url(filename)
+
+
+def change_filename(file_name):
+    new_name = str(file_name).replace(' ', '-')
+    return new_name
 
 
 def upload_file(request):
